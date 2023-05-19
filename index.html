@@ -62,7 +62,7 @@
 
     #congratsMessage {
       position: fixed;
-      top: 300px;
+      top: 100px;
       text-align: center;
       color: #E91E63;
     }
@@ -92,11 +92,17 @@
       left: 0;
       bottom: 0;
     }
+
+    #rick_dancando {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Quer namorar comigo? Sim é agora! 💐</h1>
+  <h1>Quer namorar comigo? Sim, é agora! 💐</h1>
   <button id="simButton" onclick="playMusic()">SIM</button>
   <button id="naoButton">NÃO</button>
 
@@ -108,6 +114,9 @@
   </div>
   <div id="rick_finalmente" class="rick">
     <img src="image/rick_finalmente.png" />
+  </div>
+  <div id="rick_dancando">
+    <img src="image/dancing_rick.gif" />
   </div>
 
   <div id="congratsMessage">
@@ -123,12 +132,14 @@
     const message = document.getElementById('congratsMessage');
     const rickClicaLogo = document.getElementById('rick_clica_logo');
     const rickNaoVaiDesistir = document.getElementById('rick_nao_vai_desistir');
-    const rick_finalmente = document.getElementById('rick_finalmente');
+    const rickFinalmente = document.getElementById('rick_finalmente');
+    const rickDancando = document.getElementById('rick_dancando');
 
     message.style.visibility = "hidden";
     rickNaoVaiDesistir.style.visibility = "hidden"
     rickClicaLogo.style.visibility = "hidden"
-    rick_finalmente.style.visibility = "hidden"
+    rickFinalmente.style.visibility = "hidden"
+    rickDancando.style.visibility = "hidden"
 
     var naoButton = document.getElementById('naoButton');
     var simButton = document.getElementById('simButton');
@@ -193,11 +204,16 @@
     function playMusic() {
       message.style.visibility = "visible";
       rickClicaLogo.style.visibility = "hidden";
-      rick_finalmente.style.visibility = "visible";
+      rickNaoVaiDesistir.style.visibility = "hidden";
+      rickFinalmente.style.visibility = "visible";
+      setTimeout(() => {
+        rickDancando.style.visibility = "visible";
+      }, 33000);
+      naoButton.style.visibility="hidden";
+      simButton.style.visibility="hidden";
       const player = document.createElement("AUDIO");
       player.setAttribute("src", "music/videoplayback.3gpp");
       player.play();
-      simButton.setAttribute("disabled", true)
       explodeHearts();
     }
 
