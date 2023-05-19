@@ -104,6 +104,12 @@
       left: 45%;
       bottom: 0;
     }
+    
+    #glad_rick {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
   </style>
 </head>
 
@@ -120,6 +126,9 @@
   </div>
   <div id="rick_finalmente" class="rick">
     <img src="image/rick_finalmente.png" />
+  </div>
+  <div id="glad_rick">
+    <img src="image/glad_rick.png" width="450" height="500" />
   </div>
   <div id="rick_dancando">
     <img src="image/dancing_rick.gif" />
@@ -143,12 +152,14 @@
     const rickNaoVaiDesistir = document.getElementById('rick_nao_vai_desistir');
     const rickFinalmente = document.getElementById('rick_finalmente');
     const rickDancando = document.getElementById('rick_dancando');
+    const gladRick = document.getElementById('glad_rick');
 
     message.style.visibility = "hidden";
     rickNaoVaiDesistir.style.visibility = "hidden"
     rickClicaLogo.style.visibility = "hidden"
     rickFinalmente.style.visibility = "hidden"
     rickDancando.style.visibility = "hidden"
+    gladRick.style.visibility = "hidden"
 
     var naoButton = document.getElementById('naoButton');
     var simButton = document.getElementById('simButton');
@@ -212,10 +223,12 @@
 
     function playMusic() {
       message.style.visibility = "visible";
+      gladRick.style.visibility = "visible";
       rickClicaLogo.style.visibility = "hidden";
       rickNaoVaiDesistir.style.visibility = "hidden";
       rickFinalmente.style.visibility = "visible";
       setTimeout(() => {
+        gladRick.style.visibility = "hidden";
         rickDancando.style.visibility = "visible";
       }, 33000);
       naoButton.style.visibility="hidden";
