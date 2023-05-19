@@ -62,7 +62,7 @@
 
     #congratsMessage {
       position: fixed;
-      top: 350px;
+      top: 300px;
       text-align: center;
       color: #E91E63;
     }
@@ -87,6 +87,11 @@
         opacity: 0;
       }
     }
+    .rick {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
   </style>
 </head>
 
@@ -94,6 +99,17 @@
   <h1>Quer namorar comigo? Sim é agora! 💐</h1>
   <button id="simButton" onclick="playMusic()">SIM</button>
   <button id="naoButton">NÃO</button>
+
+  <div id="rick_clica_logo" class="rick">
+    <img src="image/rick_clica_logo.png"/>
+  </div>
+  <div id="rick_nao_vai_desistir" class="rick">
+    <img src="image/rick_nao_vai_desistir.png" />
+  </div>
+  <div id="rick_finalmente" class="rick">
+    <img src="image/rick_finalmente.png" />
+  </div>
+
   <div id="congratsMessage">
     <h1 id="heart" onclick="explodeHearts()">❤</h1>
     <h2>Não existem "se"s para nós dois! </br>
@@ -105,7 +121,14 @@
   <script>
 
     const message = document.getElementById('congratsMessage');
+    const rickClicaLogo = document.getElementById('rick_clica_logo');
+    const rickNaoVaiDesistir = document.getElementById('rick_nao_vai_desistir');
+    const rick_finalmente = document.getElementById('rick_finalmente');
+
     message.style.visibility = "hidden";
+    rickNaoVaiDesistir.style.visibility = "hidden"
+    rickClicaLogo.style.visibility = "hidden"
+    rick_finalmente.style.visibility = "hidden"
 
     var naoButton = document.getElementById('naoButton');
     var simButton = document.getElementById('simButton');
@@ -133,12 +156,13 @@
         naoButton.style.left = randomX + 'px';
         naoButton.style.top = randomY + 'px';
 
-        if (count >= 4 && count <= 5) {
-          naoButton.innerHTML = "Não vai desistir? 🤡😪";
+        if (count === 3) {
+          rickNaoVaiDesistir.style.visibility = "visible";
         }
 
-        if (count >= 10 && count <= 11) {
-          naoButton.innerHTML = "Clica logo em SIM! 🤦‍♂️";
+        if (count === 6) {
+          rickNaoVaiDesistir.style.visibility = "hidden";
+          rickClicaLogo.style.visibility = "visible";
         }
         count++
       }
@@ -168,7 +192,8 @@
 
     function playMusic() {
       message.style.visibility = "visible";
-      naoButton.innerHTML = "Aí sim! Finalmente🥰";
+      rickClicaLogo.style.visibility = "hidden";
+      rick_finalmente.style.visibility = "visible";
       const player = document.createElement("AUDIO");
       player.setAttribute("src", "music/videoplayback.3gpp");
       player.play();
