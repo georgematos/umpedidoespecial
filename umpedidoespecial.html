@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      background-color: #FCE4EC;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    canvas {
+      background-color: #000000;
+    }
+
+    h1 {
+      text-align: center;
+      color: #FF4081;
+      font-size: 36px;
+      margin-top: 50px;
+    }
+
+    #heart:hover {
+      cursor: pointer;
+    }
+
+    #simButton,
+    #naoButton {
+      font-size: 36px;
+      padding: 10px 20px;
+      background-color: #FF4081;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 10px;
+    }
+
+    #simButton:hover,
+    #naoButton:hover {
+      background-color: #E91E63;
+    }
+
+    #simButton {
+      position: fixed;
+      top: 200px;
+      right: 51%;
+    }
+
+    #naoButton {
+      position: absolute;
+      width: min-content;
+      top: 200px;
+      left: 50%;
+    }
+
+    #congratsMessage {
+      position: fixed;
+      top: 350px;
+      text-align: center;
+      color: #E91E63;
+    }
+
+    .heart {
+      position: fixed;
+      top: 90vh;
+      font-size: 2rem;
+      color: pink;
+      pointer-events: none;
+      animation: hearts 5s ease-in-out infinite;
+    }
+
+    @keyframes hearts {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-100vh) scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Quer namorar comigo? Sim é agora! 💐</h1>
+  <button id="simButton" onclick="playMusic()">SIM</button>
+  <button id="naoButton">NÃO</button>
+  <div id="congratsMessage">
+    <h1 id="heart" onclick="explodeHearts()">❤</h1>
+    <h2>Não existem "se"s para nós dois! </br>
+      Nem há espaço para o medo. </br>
+      Te farei a mulher mais feliz dessa dimensão!</h2>
+    <img style="width: 50%; height: 50%;" src="image/loveAndMorty.webp" />
+  </div>
+
+  <script>
+
+    const message = document.getElementById('congratsMessage');
+    message.style.visibility = "hidden";
+
+    var naoButton = document.getElementById('naoButton');
+    var simButton = document.getElementById('simButton');
+    var screen = document.documentElement;
+
+    // Evento para mover o botão "NÃO" para uma posição aleatória quando o mouse se aproxima
+    var count = 0;
+    screen.addEventListener('mousemove', function (event) {
+      var mouseX = event.clientX;
+      var mouseY = event.clientY;
+
+      var buttonRect = naoButton.getBoundingClientRect();
+      var buttonX = buttonRect.left + buttonRect.width / 2;
+      var buttonY = buttonRect.top + buttonRect.height / 2;
+
+      var distance = Math.sqrt(Math.pow(mouseX - buttonX, 2) + Math.pow(mouseY - buttonY, 2));
+
+      if (distance < 100) {
+        var screenWidth = screen.clientWidth;
+        var screenHeight = screen.clientHeight;
+
+        var randomX = Math.floor(Math.random() * (screenWidth - 100));
+        var randomY = Math.floor(Math.random() * (screenHeight - 100));
+
+        naoButton.style.left = randomX + 'px';
+        naoButton.style.top = randomY + 'px';
+
+        if (count >= 4 && count <= 5) {
+          naoButton.innerHTML = "Não vai desistir? 🤡😪";
+        }
+
+        if (count >= 10 && count <= 11) {
+          naoButton.innerHTML = "Clica logo em SIM! 🤦‍♂️";
+        }
+        count++
+      }
+
+    });
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+      heart.innerText = '❤️';
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+
+    // Função para disparar a explosão de corações
+    function explodeHearts() {
+      for (let i = 0; i < 30; i++) {
+        setTimeout(createHeart, i * 100);
+      }
+    }
+
+    function playMusic() {
+      message.style.visibility = "visible";
+      naoButton.innerHTML = "Aí sim! Finalmente🥰";
+      const player = document.createElement("AUDIO");
+      player.setAttribute("src", "music/videoplayback.3gpp");
+      player.play();
+      simButton.setAttribute("disabled", true)
+      explodeHearts();
+    }
+
+  </script>
+</body>
+
+</html>
