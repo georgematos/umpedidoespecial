@@ -230,13 +230,13 @@
     }
 
     function triggerLastAnimation() {
+      naoButton.remove()
+      simButton.remove()
       message.style.visibility = "visible";
       gladRick.style.visibility = "visible";
       rickClicaLogo.style.visibility = "hidden";
       rickNaoVaiDesistir.style.visibility = "hidden";
       rickFinalmente.style.visibility = "visible";
-      naoButton.style.visibility="hidden";
-      simButton.style.visibility="hidden";
       explodeHearts();
       setTimeout(() => {
         gladRick.style.visibility = "hidden";
