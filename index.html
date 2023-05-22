@@ -222,21 +222,26 @@
     }
 
     function playMusic() {
+      triggerLastAnimation()
+      const player = document.createElement("AUDIO");
+      player.setAttribute("src", "music/videoplayback.3gpp");
+      player.play();
+      
+    }
+
+    function triggerLastAnimation() {
       message.style.visibility = "visible";
       gladRick.style.visibility = "visible";
       rickClicaLogo.style.visibility = "hidden";
       rickNaoVaiDesistir.style.visibility = "hidden";
       rickFinalmente.style.visibility = "visible";
+      naoButton.style.visibility="hidden";
+      simButton.style.visibility="hidden";
+      explodeHearts();
       setTimeout(() => {
         gladRick.style.visibility = "hidden";
         rickDancando.style.visibility = "visible";
       }, 33000);
-      naoButton.style.visibility="hidden";
-      simButton.style.visibility="hidden";
-      const player = document.createElement("AUDIO");
-      player.setAttribute("src", "music/videoplayback.3gpp");
-      player.play();
-      explodeHearts();
     }
 
   </script>
